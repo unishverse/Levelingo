@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Levelingo</title>
+</head>
+<body>
+  <h2>Levelingo Daily Challenge</h2>
+  
+  <button onclick="submitAnswer()">Submit Answer</button>
+
+  <script>
+    function submitAnswer() {
+      // IMPORTANT: Paste your Apps Script Web App URL between the quotes below!
+      const API_URL = "https://script.google.com/macros/s/AKfycbzeYyAspBrMtERAKcLReygJ4QrIts8NRH_lQLhE9FkwEitIcF4Fcc9usX7qotZx0A3A/exec"; 
+
+      const requestData = {
+        action: "answerDaily",
+        payload: {
+          token: "USR_TEST_001",
+          day: "2026-10-16",
+          question: "QST_M1U1_1"
+        }
+      };
+
+      fetch(API_URL, {
+        method: "POST",
+        redirect: "follow",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(requestData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert("Success! Check your Google Sheet to see if it recorded the answer.");
+      })
+      .catch(error => {
+        alert("Error connecting to Apps Script.");
+      });
+    }
+  </script>
+</body>
+</html>
